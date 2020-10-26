@@ -9,10 +9,8 @@ import java.awt.event.WindowEvent;
 
 public class TankFrame extends Frame{
 	
-	int x=200;
-	int y=200;
-	Dir dir=Dir.DOWN;
-	private static final int speed=10;
+	Tank tank=new Tank(200,200,Dir.DOWN);
+	
 	
 	public TankFrame() {
 		setSize(800, 600);//大小
@@ -32,25 +30,7 @@ public class TankFrame extends Frame{
 	
 	@Override
 	public void paint(Graphics g){//只要窗口需要重新绘制就被自动调用，会清理之前的显示
-		g.fillRect(x, y, 50, 50);//填充矩形
-		//x+=10;
-		//y+=10;
-		switch (dir) {
-		case LEFT:
-			x-=speed;
-			break;
-		case RIGHT:
-			x+=speed;
-			break;
-		case UP:
-			y-=speed;
-			break;
-		case DOWN:
-			y+=speed;
-			break;
-		default:
-			break;
-		}
+		tank.paint(g);
 		
 	}
 	
@@ -114,10 +94,10 @@ public class TankFrame extends Frame{
 		}
 
 		private void setMainTankDir() {
-			if(bL) dir=Dir.LEFT;
-			if(bR) dir=Dir.RIGHT;
-			if(bU) dir=Dir.UP;
-			if(bD) dir=Dir.DOWN;
+			if(bL) tank.setDir(Dir.LEFT);
+			if(bR) tank.setDir(Dir.RIGHT);
+			if(bU) tank.setDir(Dir.UP);
+			if(bD) tank.setDir(Dir.DOWN);
 			
 		}
 		

@@ -2,6 +2,8 @@ package com.cc.tank;
 
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -16,6 +18,8 @@ public class TankFrame extends Frame{
 		setTitle("tank war");//标题
 		setVisible(true);//打开窗口
 		
+		this.addKeyListener(new MyKeyListener());
+		
 		addWindowListener(new WindowAdapter() {//监听器点击x关闭窗口
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -28,7 +32,23 @@ public class TankFrame extends Frame{
 	public void paint(Graphics g){//只要窗口需要重新绘制就被自动调用，会清理之前的显示
 		g.fillRect(x, y, 50, 50);//填充矩形
 		x+=10;
-		y+=10;
+		//y+=10;
+		
+	}
+	
+	class MyKeyListener extends KeyAdapter{
+
+		@Override
+		public void keyPressed(KeyEvent e) {//按下键盘
+			System.out.println("key pressed");
+			x+=30;
+			//repaint();
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {//释放键盘
+			System.out.println("key released");
+		}
 		
 	}
 	

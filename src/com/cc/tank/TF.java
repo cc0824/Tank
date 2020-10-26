@@ -5,8 +5,14 @@ import java.awt.event.WindowEvent;
 
 public class TF {
 
-	public static void main(String[] args) {
-		TankFrame f=new TankFrame();
+	public static void main(String[] args) throws InterruptedException {
+		TankFrame tf=new TankFrame();
+		
+		while(true) {
+			Thread.sleep(50);
+			tf.repaint();
+		}
+		
 		
 		
 		

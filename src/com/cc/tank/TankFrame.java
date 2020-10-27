@@ -10,6 +10,7 @@ import java.awt.event.WindowEvent;
 public class TankFrame extends Frame{
 	
 	Tank tank=new Tank(200,200,Dir.DOWN);
+	Bullet b=new Bullet(300,300,Dir.DOWN);
 	
 	
 	public TankFrame() {
@@ -30,8 +31,8 @@ public class TankFrame extends Frame{
 	
 	@Override
 	public void paint(Graphics g){//只要窗口需要重新绘制就被自动调用，会清理之前的显示
-		tank.paint(g);
-		
+		tank.paint(g);//如果不这么写，需要tank.get(x)/get(y)获取，而x、y都是tank对象的属性，失去封装对象的意义
+		b.paint(g);
 	}
 	
 	class MyKeyListener extends KeyAdapter{
@@ -66,7 +67,7 @@ public class TankFrame extends Frame{
 				break;
 			}
 			
-			setMainTankDir();
+			setMainTankDir();//按键走
 		}
 
 		@Override
@@ -90,6 +91,7 @@ public class TankFrame extends Frame{
 				break;
 			}
 			
+			//不按键就停
 			setMainTankDir();
 		}
 

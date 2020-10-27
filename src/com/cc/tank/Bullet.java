@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Bullet {
-	private static final int SPEED=3;
-	private static final int WIDTH=15,HEIGHT=15;
+	private static final int SPEED=5;
+	private static final int WIDTH=16,HEIGHT=16;
 	
 	private Dir dir;
 	private int x,y;

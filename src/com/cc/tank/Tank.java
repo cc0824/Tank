@@ -1,5 +1,6 @@
 package com.cc.tank;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Tank {
@@ -7,6 +8,7 @@ public class Tank {
 	private Dir dir=Dir.DOWN;
 	private static final int speed=5;
 	private boolean moving = false;
+	private TankFrame tf=null;
 	
 	public boolean isMoving() {
 		return moving;
@@ -18,11 +20,12 @@ public class Tank {
 	}
 
 
-	public Tank(int x, int y, Dir dir) {
+	public Tank(int x, int y, Dir dir,TankFrame tf) {
 		super();
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
+		this.tf=tf;
 	}
 	
 
@@ -37,7 +40,10 @@ public class Tank {
 
 
 	public void paint(Graphics g) {
+		Color c=g.getColor();
+		g.setColor(Color.YELLOW);
 		g.fillRect(x, y, 50, 50);//填充矩形
+		g.setColor(c);
 		move();
 		
 	}
@@ -61,6 +67,12 @@ public class Tank {
 		default:
 			break;
 		}
+		
+	}
+
+
+	public void fire() {
+		tf.b=new Bullet(this.x+17, this.y+17, this.dir);
 		
 	}
 	

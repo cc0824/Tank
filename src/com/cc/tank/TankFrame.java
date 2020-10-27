@@ -1,7 +1,9 @@
 package com.cc.tank;
 
+import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -9,8 +11,9 @@ import java.awt.event.WindowEvent;
 
 public class TankFrame extends Frame{
 	
-	Tank tank=new Tank(200,200,Dir.DOWN);
+	Tank tank=new Tank(200,200,Dir.DOWN,this);//传递窗口的引用
 	Bullet b=new Bullet(300,300,Dir.DOWN);
+	private static final int GAME_WIDTH=800,GAME_HEIGHT=600;
 	
 	
 	public TankFrame() {
@@ -27,6 +30,24 @@ public class TankFrame extends Frame{
 				System.exit(0);
 			}
 		});
+	}
+	
+	//双缓冲消除闪烁
+	Image offScreenImage = null;
+	@Override
+	public void update(Graphics g) {
+		//在系统内存中把坦克图片画出来
+		if (offScreenImage == null) {
+			offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
+		}
+		Graphics gOffScreen = offScreenImage.getGraphics();
+		Color c = gOffScreen.getColor();
+		gOffScreen.setColor(Color.BLACK);
+		gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+		gOffScreen.setColor(c);
+		paint(gOffScreen);
+		//屏幕上画笔g将内存的图片画到屏幕上
+		g.drawImage(offScreenImage, 0, 0, null);
 	}
 	
 	@Override
@@ -85,6 +106,10 @@ public class TankFrame extends Frame{
 				break;
 			case KeyEvent.VK_DOWN:
 				bD=false;
+				break;
+				
+			case KeyEvent.VK_CONTROL://按下ctrl键开火
+				tank.fire();
 				break;
 
 			default:
